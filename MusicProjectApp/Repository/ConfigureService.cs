@@ -20,7 +20,8 @@ namespace Repository
         {
             //
             services.AddScoped<IAccountRepository, AccountRepository>();
-            
+            services.AddScoped<ITokenRepository, TokenRepository>();
+
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             

@@ -20,7 +20,5 @@ namespace BusinessObject.IdentityModel
         public string? Phone { get; set; }
 
         public string? Role { get; set; }
-
-        public string? BankAccountNumber { get; set; }
     }
 }
