@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    public class SheetDAO : BaseDAO<SheetDAO>
+    public class SheetDAO : BaseDAO<Sheet>
     {
         private readonly MusicProjectContext _context;
         public SheetDAO(MusicProjectContext context) : base(context)
