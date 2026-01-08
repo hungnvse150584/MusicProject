@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using BusinessObject.Model;
-
-using Service.RequestAndResponse.Request.Staffs;
+using Service.RequestAndResponse.Response.Sheets;
+using Service.RequestAndResponse.Response.KeySignatures;
+using Service.RequestAndResponse.Response.TimeSignatures;
 using Service.RequestAndResponse.Response.Accounts;
-
-using Service.RequestAndResponse.Response.Staffs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Service.RequestAndResponse.Response.Clefs;
+using Service.RequestAndResponse.Response.Measures;
+using Service.RequestAndResponse.Response.Notes;
+using Service.RequestAndResponse.Response.NoteTypes;
+using Service.RequestAndResponse.Response.Beats;
+using Service.RequestAndResponse.Response.Songs;
+using Service.RequestAndResponse.Response.Rests;
 
 namespace Service.Mapping
 {
@@ -20,8 +19,16 @@ namespace Service.Mapping
         public MappingProfile()
         {
             CreateMap<Account, GetAccountUser>().ReverseMap();
+            CreateMap<Sheet, SheetResponse>();
+            CreateMap<KeySignature, KeySignatureResponse>();
+            CreateMap<TimeSignature, TimeSignatureResponse>();
+            CreateMap<Clef, ClefResponse>();
+            CreateMap<Measure, MeasureResponse>();
+            CreateMap<Note, NoteResponse>();
+            CreateMap<NoteType, NoteTypeResponse>();
+            CreateMap<Beat, BeatResponse>();
+            CreateMap<Song, SongResponse>();
+            CreateMap<Rest, RestResponse>();
         }
-      
     }
-
 }
