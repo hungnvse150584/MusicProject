@@ -20,19 +20,19 @@ namespace GreenRoam.Controllers
         [HttpGet]
         public async Task<BaseResponse<IEnumerable<RestResponse>>> GetAll() => await _service.GetAllAsync();
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<BaseResponse<RestResponse>> GetById(int id) => await _service.GetByIdAsync(id);
 
-        [Authorize(Roles = "Teacher,Admin")]
+        //[Authorize(Roles = "Teacher,Admin")]
         [HttpPost]
         public async Task<BaseResponse<RestResponse>> Create(CreateRestRequest req) => await _service.CreateAsync(req);
 
-        [Authorize(Roles = "Teacher,Admin")]
-        [HttpPut("{id:int}")]
+        //[Authorize(Roles = "Teacher,Admin")]
+        [HttpPut("{id}")]
         public async Task<BaseResponse<RestResponse>> Update(int id, UpdateRestRequest req) => await _service.UpdateAsync(id, req);
 
-        [Authorize(Roles = "Teacher,Admin")]
-        [HttpDelete("{id:int}")]
+        //[Authorize(Roles = "Teacher,Admin")]
+        [HttpDelete("{id}")]
         public async Task<BaseResponse<RestResponse>> Delete(int id) => await _service.DeleteAsync(id);
     }
 }

@@ -20,7 +20,7 @@ namespace GreenRoam.Controllers
         [HttpGet]
         public async Task<BaseResponse<IEnumerable<NoteTypeResponse>>> GetAll() => await _service.GetAllAsync();
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<BaseResponse<NoteTypeResponse>> GetById(int id) => await _service.GetByIdAsync(id);
 
         //[Authorize(Roles = "Teacher,Admin")]
@@ -28,11 +28,11 @@ namespace GreenRoam.Controllers
         public async Task<BaseResponse<NoteTypeResponse>> Create(CreateNoteTypeRequest req) => await _service.CreateAsync(req);
 
         //[Authorize(Roles = "Teacher,Admin")]
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public async Task<BaseResponse<NoteTypeResponse>> Update(int id, UpdateNoteTypeRequest req) => await _service.UpdateAsync(id, req);
 
         //[Authorize(Roles = "Teacher,Admin")]
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public async Task<BaseResponse<NoteTypeResponse>> Delete(int id) => await _service.DeleteAsync(id);
     }
 }

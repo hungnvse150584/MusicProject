@@ -62,6 +62,32 @@ namespace DataAccessObject
                    }
               };
             modelBuilder.Entity<IdentityRole>().HasData(roles);
+            modelBuilder.Entity<Track>()
+                .HasOne(t => t.Sheet)
+                .WithMany(s => s.Tracks)
+                .HasForeignKey(t => t.SheetID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Sheet>()
+                .HasOne(s => s.Song)
+                .WithMany(song => song.Sheets)
+                .HasForeignKey(s => s.SongID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Instrument>()
+                .HasOne(i => i.DefaultSound)
+                .WithOne(s => s.DefaultInstrument)
+                .HasForeignKey<Instrument>(i => i.DefaultSoundID)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Sound>()
+                .Property(s => s.Price)
+                .HasPrecision(18, 4);  // 18 chữ số tổng, 4 chữ số thập phân (phù hợp giá tiền)
+
+            modelBuilder.Entity<SoundPack>()
+                .Property(sp => sp.Price)
+                .HasPrecision(18, 4);
+
         }
 
         public DbSet<Account> Accounts { get; set; }
@@ -69,23 +95,28 @@ namespace DataAccessObject
         public DbSet<Clef> Clefs { get; set; }
         public DbSet<KeySignature> KeySignatures { get; set; }
         public DbSet<Measure> Measures { get; set; }
-        public DbSet<Note> Notes { get; set; }
+        public DbSet<MusicalEvent> MusicalEvents { get; set; }
         public DbSet<NoteType> NoteTypes { get; set; }
+        public DbSet<NotePitch> NotePitches { get; set; }
+        public DbSet<TupletGroup> TupletGroups { get; set; }
+        public DbSet<NotationItem> NotationItems { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Rest> Rests { get; set; }
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<TimeSignature> TimeSignatures { get; set; }
         public DbSet<Track> Tracks { get; set; }
+     	public DbSet<Sound> Sounds { get; set; }
+	    public DbSet<SoundPack> SoundPacks { get; set; }
+	    public DbSet<SoundPackItem> SoundPackItems { get; set; }
+	    public DbSet<Instrument> Instruments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                if (!optionsBuilder.IsConfigured)
-                {
-                    optionsBuilder.UseSqlServer(GetConnectionString());
-                }
+                optionsBuilder.UseSqlServer(GetConnectionString(),
+                    sqlOptions => sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             }
         }
         private string GetConnectionString()

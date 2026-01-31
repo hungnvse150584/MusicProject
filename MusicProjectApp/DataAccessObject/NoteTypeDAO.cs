@@ -29,7 +29,7 @@ namespace DataAccessObject
                 throw new ArgumentNullException($"id {id} not found");
             }
             var entity = await _context.Set<NoteType>()
-                        .Include(c => c.Note)
+                        .Include(c => c.MusicalEvent)
                .SingleOrDefaultAsync(c => c.NoteTypeID == id);
             if (entity == null)
             {

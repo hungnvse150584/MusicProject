@@ -48,7 +48,7 @@ namespace Service.Service
         {
             var entity = new NoteType
             {
-                NoteID = request.NoteID,
+                EventID = request.NoteID,
                 NoteTypeName = request.NoteTypeName,
                 Duration = request.Duration
             };
@@ -68,7 +68,7 @@ namespace Service.Service
             try
             {
                 var existing = await _repo.GetByIdAsync(id);
-                existing.NoteID = request.NoteID;
+                existing.EventID = request.NoteID;
                 existing.NoteTypeName = request.NoteTypeName;
                 existing.Duration = request.Duration;
                 var updated = await _repo.UpdateAsync(existing);

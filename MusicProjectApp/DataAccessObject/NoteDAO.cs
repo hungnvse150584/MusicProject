@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
-    public class NoteDAO : BaseDAO<Note>
+    public class NoteDAO : BaseDAO<MusicalEvent>
     {
         private readonly MusicProjectContext _context;
         public NoteDAO(MusicProjectContext context) : base(context)
@@ -17,21 +17,21 @@ namespace DataAccessObject
             _context = context;
         }
 
-        public async Task<IEnumerable<Note>> GetAllNoteAsync()
+        public async Task<IEnumerable<MusicalEvent>> GetAllNoteAsync()
         {
-            return await _context.Notes.ToListAsync();
+            return await _context.MusicalEvents.ToListAsync();
         }
 
-        public async Task<Note> GetNoteByIdAsync(int id)
+        public async Task<MusicalEvent> GetNoteByIdAsync(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentNullException($"id {id} not found");
             }
-            var entity = await _context.Set<Note>()
+            var entity = await _context.Set<MusicalEvent>()
                         .Include(c => c.NoteTypes)
                         .Include(c => c.Measure)
-               .SingleOrDefaultAsync(c => c.NoteID == id);
+               .SingleOrDefaultAsync(c => c.EventID == id);
             if (entity == null)
             {
                 throw new ArgumentNullException($"Entity with id {id} not found");

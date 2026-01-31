@@ -60,6 +60,29 @@ namespace Service
             services.AddScoped<IRestService, RestService>();
             services.AddScoped<IRestRepository, RestRepository>();
 
+            services.AddScoped<ITupletGroupService, TupletGroupService>();
+            services.AddScoped<ITupletGroupRepository, TupletGroupRepository>();
+
+            services.AddScoped<INotePitchService, NotePitchService>();
+            services.AddScoped<INotePitchRepository, NotePitchRepository>();
+
+            services.AddScoped<INotationItemService, NotationItemService>();
+            services.AddScoped<INotationItemRepository, NotationItemRepository>();
+
+            services.AddScoped<IMusicalEventService, MusicalEventService>();
+            services.AddScoped<IMusicalEventRepository, MusicalEventRepository>();
+
+            services.AddScoped<ISoundPackService, SoundPackService>();
+            services.AddScoped<ISoundPackRepository, SoundPackRepository>();
+
+            services.AddScoped<ISoundService, SoundService>();
+            services.AddScoped<ISoundRepository, SoundRepository>();
+
+            services.AddScoped<ISoundPackItemService, SoundPackItemService>();
+            services.AddScoped<ISoundPackItemRepository, SoundPackItemRepository>();
+
+            services.AddScoped<IInstrumentService, InstrumentService>();
+            services.AddScoped<IInstrumentRepository, InstrumentRepository>();
             return services;
         }
     }

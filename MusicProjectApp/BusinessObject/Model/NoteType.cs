@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class NoteType
+    public class NoteType // Kiểu nốt: đen, móc đơn, đôi,...    
     {
         [Key]
         public int NoteTypeID { get; set; }
 
-        public int NoteID { get; set; }
-        public Note Note { get; set; } = null!;
+        // After merging Note into MusicalEvent, link to the event
+        public int EventID { get; set; }
+        public MusicalEvent MusicalEvent { get; set; } = null!;
 
         public string NoteTypeName { get; set; }
 

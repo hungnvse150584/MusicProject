@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class Clef
+    public class Clef // Khoá nhạc
     {
         [Key]
         public int ClefID { get; set; }

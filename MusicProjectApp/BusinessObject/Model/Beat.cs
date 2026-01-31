@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class Beat
+    public class Beat // Phách trong ô nhịp
     {
         [Key]
         public int BeatID { get; set; }
