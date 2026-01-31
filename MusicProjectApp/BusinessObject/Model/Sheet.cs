@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class Sheet
+    public class Sheet // Bản nhạc 
     {
         [Key]
         public int SheetID { get; set; }
 
         public string Author { get; set; }
+        public string Title { get; set; }
+        public int? InitialTempoBPM { get; set; }
+        public string InitialTempoText { get; set; }  // "Allegro", "Moderato assai"...
 
         public int SongID { get; set; }
         public int TimeSignatureID { get; set; }
@@ -21,5 +24,6 @@ namespace BusinessObject.Model
         public Song Song { get; set; } = null!;
         public TimeSignature TimeSignature { get; set; } = null!;
         public KeySignature KeySignature { get; set; } = null!;
+        public ICollection<Track> Tracks { get; set; } = new List<Track>();
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Service.RequestAndResponse.Enums;
 using BusinessObject.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace GreenRoam.Controllers
 {
@@ -26,7 +27,7 @@ namespace GreenRoam.Controllers
             return await _sheetService.GetAllAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<BaseResponse<SheetResponse>> GetById(int id)
         {
             return await _sheetService.GetByIdAsync(id);
@@ -40,17 +41,29 @@ namespace GreenRoam.Controllers
         }
 
         //[Authorize(Roles = "Teacher,Admin")]
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public async Task<BaseResponse<SheetResponse>> Update(int id, UpdateSheetRequest request)
         {
             return await _sheetService.UpdateAsync(id, request);
         }
 
         //[Authorize(Roles = "Teacher,Admin")]
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public async Task<BaseResponse<SheetResponse>> Delete(int id)
         {
             return await _sheetService.DeleteAsync(id);
+        }
+
+        [HttpPost("import/{songId}")]
+        public async Task<BaseResponse<SheetResponse>> ImportMusicXml(IFormFile file, int songId, [FromQuery] string? author)
+        {
+            return await _sheetService.ImportMusicXmlAsync(file, songId, author);
+        }
+
+        [HttpPost("import-midi/{songId}")]
+        public async Task<BaseResponse<SheetResponse>> ImportMidi(IFormFile file, int songId, [FromQuery] string? author)
+        {
+            return await _sheetService.ImportMidiAsync(file, songId, author);
         }
     }
 }

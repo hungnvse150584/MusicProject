@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class KeySignature
+    public class KeySignature // Giọng 
     {
         [Key]
         public int KeySignatureID { get; set; }

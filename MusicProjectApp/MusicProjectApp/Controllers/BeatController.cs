@@ -23,15 +23,15 @@ namespace GreenRoam.Controllers
         [HttpGet("{id:int}")]
         public async Task<BaseResponse<BeatResponse>> GetById(int id) => await _service.GetByIdAsync(id);
 
-        [Authorize(Roles = "Teacher,Admin")]
+        //[Authorize(Roles = "Teacher,Admin")]
         [HttpPost]
         public async Task<BaseResponse<BeatResponse>> Create(CreateBeatRequest req) => await _service.CreateAsync(req);
 
-        [Authorize(Roles = "Teacher,Admin")]
+        //[Authorize(Roles = "Teacher,Admin")]
         [HttpPut("{id:int}")]
         public async Task<BaseResponse<BeatResponse>> Update(int id, UpdateBeatRequest req) => await _service.UpdateAsync(id, req);
 
-        [Authorize(Roles = "Teacher,Admin")]
+        //[Authorize(Roles = "Teacher,Admin")]
         [HttpDelete("{id:int}")]
         public async Task<BaseResponse<BeatResponse>> Delete(int id) => await _service.DeleteAsync(id);
     }

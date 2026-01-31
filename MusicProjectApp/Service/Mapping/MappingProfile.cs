@@ -24,11 +24,37 @@ namespace Service.Mapping
             CreateMap<TimeSignature, TimeSignatureResponse>();
             CreateMap<Clef, ClefResponse>();
             CreateMap<Measure, MeasureResponse>();
-            CreateMap<Note, NoteResponse>();
-            CreateMap<NoteType, NoteTypeResponse>();
+
+            CreateMap<MusicalEvent, NoteResponse>()
+                .ForMember(dest => dest.NoteID, opt => opt.MapFrom(src => src.EventID))
+                .ForMember(dest => dest.MeasureID, opt => opt.MapFrom(src => src.MeasureID))
+                .ForMember(dest => dest.StartBeat, opt => opt.MapFrom(src => src.StartBeat))
+                .ForMember(dest => dest.Duration, opt => opt.MapFrom(src => src.DurationInBeats))
+                .ForMember(dest => dest.IsChord, opt => opt.MapFrom(src => src.IsChord))
+                .ForMember(dest => dest.Pitch, opt => opt.Ignore())
+                .ForMember(dest => dest.Octave, opt => opt.Ignore())
+                .ForMember(dest => dest.Alter, opt => opt.Ignore())
+                .AfterMap((src, dest) =>
+                {
+                    var first = src.Pitches?.FirstOrDefault();
+                    if (first != null)
+                    {
+                        dest.Octave = first.Octave;
+                        dest.Alter = (int)first.Alter;
+                        dest.Pitch = first.Step switch { 0 => "C", 1 => "D", 2 => "E", 3 => "F", 4 => "G", 5 => "A", 6 => "B", _ => "C" };
+                    }
+                });
+
+            CreateMap<NoteType, NoteTypeResponse>()
+                .ForMember(dest => dest.NoteID, opt => opt.MapFrom(src => src.EventID));
+
             CreateMap<Beat, BeatResponse>();
             CreateMap<Song, SongResponse>();
             CreateMap<Rest, RestResponse>();
+            CreateMap<Sound, Sound>();
+            CreateMap<SoundPack, SoundPack>();
+            CreateMap<SoundPackItem, SoundPackItem>();
+            CreateMap<Instrument, Instrument>();
         }
     }
 }

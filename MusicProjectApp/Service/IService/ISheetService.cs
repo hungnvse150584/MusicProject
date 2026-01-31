@@ -4,6 +4,7 @@ using Service.RequestAndResponse.Response.Sheets;
 using Service.RequestAndResponse.Request.Sheets;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Service.IService
 {
@@ -14,5 +15,8 @@ namespace Service.IService
         Task<BaseResponse<SheetResponse>> CreateAsync(CreateSheetRequest request);
         Task<BaseResponse<SheetResponse>> UpdateAsync(int id, UpdateSheetRequest request);
         Task<BaseResponse<SheetResponse>> DeleteAsync(int id);
+
+        Task<BaseResponse<SheetResponse>> ImportMusicXmlAsync(IFormFile file, int songId, string? author);
+        Task<BaseResponse<SheetResponse>> ImportMidiAsync(IFormFile file, int songId, string? author);
     }
 }

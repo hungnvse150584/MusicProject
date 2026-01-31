@@ -32,6 +32,14 @@ namespace Repository
             services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<ITimeSignatureRepository, TimeSignatureRepository>();
             services.AddScoped<ITrackRepository, TrackRepository>();
+            services.AddScoped<INotePitchRepository, NotePitchRepository>();
+            services.AddScoped<INotationItemRepository, NotationItemRepository>();
+            services.AddScoped<ITupletGroupRepository, TupletGroupRepository>();
+            services.AddScoped<IMusicalEventRepository, MusicalEventRepository>();
+            services.AddScoped<ISoundRepository, SoundRepository>();
+            services.AddScoped<ISoundPackItemRepository, SoundPackItemRepository>();
+            services.AddScoped<ISoundPackRepository, SoundPackRepository>();
+            services.AddScoped<IInstrumentRepository, InstrumentRepository>();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
@@ -48,7 +56,14 @@ namespace Repository
             services.AddScoped<SongDAO>();
             services.AddScoped<TimeSignatureDAO>();
             services.AddScoped<TrackDAO>();
-
+            services.AddScoped<NotePitchDAO>();
+            services.AddScoped<NotationItemDAO>();
+            services.AddScoped<TupletGroupDAO>();
+            services.AddScoped<MusicalEventDAO>();
+            services.AddScoped<SoundDAO>();
+            services.AddScoped<SoundPackItemDAO>();
+            services.AddScoped<SoundPackDAO>();
+            services.AddScoped<InstrumentDAO>();
             //
 
             return services;

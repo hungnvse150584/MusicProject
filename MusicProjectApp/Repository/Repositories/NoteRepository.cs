@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class NoteRepository : BaseRepository<Note>, INoteRepository
+    public class NoteRepository : BaseRepository<MusicalEvent>, INoteRepository
     {
         private readonly NoteDAO _noteDao;
 
@@ -19,32 +19,32 @@ namespace Repository.Repositories
             _noteDao = noteDao;
         }
 
-        public async Task<IEnumerable<Note>> GetAllWithDetailsAsync()
+        public async Task<IEnumerable<MusicalEvent>> GetAllWithDetailsAsync()
         {
            return await _noteDao.GetAllNoteAsync();
         }
 
-        public async Task<Note> GetNoteByIdAsync(int id)
+        public async Task<MusicalEvent> GetNoteByIdAsync(int id)
         {
             return await _noteDao.GetNoteByIdAsync(id);
         }
 
-        public async Task<List<Note>> AddListAsync(List<Note> entity)
+        public async Task<List<MusicalEvent>> AddListAsync(List<MusicalEvent> entity)
         {
             return await _noteDao.AddRange(entity);
         }
 
-        public async Task<Note> AddAsync(Note entity)
+        public async Task<MusicalEvent> AddAsync(MusicalEvent entity)
         {
             return await _noteDao.AddAsync(entity);
         }
 
-        public async Task<Note> UpdateAsync(Note entity)
+        public async Task<MusicalEvent> UpdateAsync(MusicalEvent entity)
         {
             return await _noteDao.UpdateAsync(entity);
         }
 
-        public async Task<Note> DeleteAsync(Note entity)
+        public async Task<MusicalEvent> DeleteAsync(MusicalEvent entity)
         {
             return await _noteDao.DeleteAsync(entity);
         }

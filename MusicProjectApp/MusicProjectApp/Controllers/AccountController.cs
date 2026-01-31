@@ -36,7 +36,7 @@ namespace GreenRoam.Controllers
             _accountService = accountService;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("adminDashBoard/GetTotalAccount")]
         public async Task<BaseResponse<GetTotalAccount>> GetTotalAccount()
         {

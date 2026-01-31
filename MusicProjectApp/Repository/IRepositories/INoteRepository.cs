@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Repository.IRepositories
 {
-    public interface INoteRepository : IBaseRepository<Note>
+    public interface INoteRepository : IBaseRepository<MusicalEvent>
     {
-        Task<IEnumerable<Note>> GetAllWithDetailsAsync();
-        Task<Note> GetNoteByIdAsync(int id);
+        Task<IEnumerable<MusicalEvent>> GetAllWithDetailsAsync();
+        Task<MusicalEvent> GetNoteByIdAsync(int id);
     }
 }

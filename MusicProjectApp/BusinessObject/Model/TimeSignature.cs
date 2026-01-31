@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class TimeSignature
+    public class TimeSignature // Nhịp
     {
 
         [Key]

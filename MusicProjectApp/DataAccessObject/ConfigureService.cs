@@ -20,13 +20,21 @@ namespace DataAccessObject
             services.AddScoped<Clef>();
             services.AddScoped<KeySignature>();
             services.AddScoped<Measure>();
-            services.AddScoped<Note>();
+            services.AddScoped<MusicalEvent>();
             services.AddScoped<NoteType>();
             services.AddScoped<Rest>();
             services.AddScoped<Sheet>();
             services.AddScoped<Song>();
             services.AddScoped<TimeSignature>();
             services.AddScoped<Track>();
+            services.AddScoped<NotePitch>();
+            services.AddScoped<NotationItem>();
+            services.AddScoped<TupletGroup>();
+            services.AddScoped<Instrument>();
+            services.AddScoped<Sound>();
+            services.AddScoped<SoundPack>();
+            services.AddScoped<SoundPackItem>();
+
             services.AddScoped<RefreshToken>();
             
             services.AddScoped(typeof(IBaseDAO<>), typeof(BaseDAO<>));

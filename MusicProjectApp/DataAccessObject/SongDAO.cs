@@ -30,8 +30,7 @@ namespace DataAccessObject
             }
             var entity = await _context.Set<Song>()
                         .Include(c => c.Sheets)
-                        .Include(c => c.Measures)
-                        .Include(c => c.Tracks)
+                        .Include(c => c.Measures)                  
                .SingleOrDefaultAsync(c => c.SongID == id);
             if (entity == null)
             {

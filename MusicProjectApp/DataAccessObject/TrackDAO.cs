@@ -29,7 +29,6 @@ namespace DataAccessObject
                 throw new ArgumentNullException($"id {id} not found");
             }
             var entity = await _context.Set<Track>()
-                        .Include(c => c.Song)
                         .Include(c => c.Clef)
                .SingleOrDefaultAsync(c => c.TrackID == id);
             if (entity == null)

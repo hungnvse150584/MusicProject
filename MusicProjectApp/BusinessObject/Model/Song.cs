@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Model
 {
-    public class Song
+    public class Song // Bài hát
     {
         [Key]
         public int SongID { get; set; }
@@ -27,6 +27,5 @@ namespace BusinessObject.Model
 
         public ICollection<Measure> Measures { get; set; }
 
-        public ICollection<Track> Tracks { get; set; }
     }
 }

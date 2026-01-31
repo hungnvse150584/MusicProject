@@ -143,6 +143,45 @@ namespace DataAccessObject.Migrations
                     b.ToTable("Clefs");
                 });
 
+            modelBuilder.Entity("BusinessObject.Model.Instrument", b =>
+                {
+                    b.Property<int>("InstrumentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstrumentID"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DefaultSoundID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerAccountId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("InstrumentID");
+
+                    b.HasIndex("DefaultSoundID")
+                        .IsUnique()
+                        .HasFilter("[DefaultSoundID] IS NOT NULL");
+
+                    b.ToTable("Instruments");
+                });
+
             modelBuilder.Entity("BusinessObject.Model.KeySignature", b =>
                 {
                     b.Property<int>("KeySignatureID")
@@ -175,54 +214,178 @@ namespace DataAccessObject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MeasureID"));
 
+                    b.Property<int>("EndBarline")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeftBarline")
+                        .HasColumnType("int");
+
                     b.Property<int>("MeasureNumber")
                         .HasColumnType("int");
 
+                    b.Property<int>("RightBarline")
+                        .HasColumnType("int");
+
                     b.Property<int>("SongID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TimeSignatureID")
                         .HasColumnType("int");
 
                     b.HasKey("MeasureID");
 
                     b.HasIndex("SongID");
 
+                    b.HasIndex("TimeSignatureID");
+
                     b.ToTable("Measures");
                 });
 
-            modelBuilder.Entity("BusinessObject.Model.Note", b =>
+            modelBuilder.Entity("BusinessObject.Model.MusicalEvent", b =>
                 {
-                    b.Property<int>("NoteID")
+                    b.Property<int>("EventID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NoteID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventID"));
 
-                    b.Property<int>("Alter")
+                    b.Property<int>("BaseNoteType")
                         .HasColumnType("int");
 
-                    b.Property<float>("Duration")
+                    b.Property<int>("DotCount")
+                        .HasColumnType("int");
+
+                    b.Property<float>("DurationInBeats")
+                        .HasColumnType("real");
+
+                    b.Property<float>("GraceDurationRatio")
                         .HasColumnType("real");
 
                     b.Property<bool>("IsChord")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsGraceNote")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRest")
+                        .HasColumnType("bit");
+
                     b.Property<int>("MeasureID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("StartBeat")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("TupletID")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventID");
+
+                    b.HasIndex("MeasureID");
+
+                    b.HasIndex("TupletID");
+
+                    b.ToTable("MusicalEvents");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.NotationItem", b =>
+                {
+                    b.Property<int>("NotationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotationID"));
+
+                    b.Property<int?>("Articulation")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Dynamic")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("EndBeat")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("HairpinType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCrescendo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDiminuendo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsHairpinEnd")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsHairpinStart")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLyric")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsStaffText")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSustainPedal")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeasureID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Ornament")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PedalEnd")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PedalStart")
+                        .HasColumnType("bit");
+
+                    b.Property<float>("StartBeat")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotationID");
+
+                    b.HasIndex("MeasureID");
+
+                    b.ToTable("NotationItems");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.NotePitch", b =>
+                {
+                    b.Property<int>("NotePitchID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotePitchID"));
+
+                    b.Property<int>("Alter")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Fret")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MusicalEventID")
                         .HasColumnType("int");
 
                     b.Property<int>("Octave")
                         .HasColumnType("int");
 
-                    b.Property<string>("Pitch")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Step")
+                        .HasColumnType("int");
 
-                    b.Property<float>("StartBeat")
-                        .HasColumnType("real");
+                    b.Property<int?>("StringNumber")
+                        .HasColumnType("int");
 
-                    b.HasKey("NoteID");
+                    b.HasKey("NotePitchID");
 
-                    b.HasIndex("MeasureID");
+                    b.HasIndex("MusicalEventID");
 
-                    b.ToTable("Notes");
+                    b.ToTable("NotePitches");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.NoteType", b =>
@@ -236,7 +399,10 @@ namespace DataAccessObject.Migrations
                     b.Property<float>("Duration")
                         .HasColumnType("real");
 
-                    b.Property<int>("NoteID")
+                    b.Property<int>("EventID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MusicalEventEventID")
                         .HasColumnType("int");
 
                     b.Property<string>("NoteTypeName")
@@ -245,7 +411,7 @@ namespace DataAccessObject.Migrations
 
                     b.HasKey("NoteTypeID");
 
-                    b.HasIndex("NoteID");
+                    b.HasIndex("MusicalEventEventID");
 
                     b.ToTable("NoteTypes");
                 });
@@ -323,6 +489,13 @@ namespace DataAccessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("InitialTempoBPM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InitialTempoText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("KeySignatureID")
                         .HasColumnType("int");
 
@@ -331,6 +504,10 @@ namespace DataAccessObject.Migrations
 
                     b.Property<int>("TimeSignatureID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SheetID");
 
@@ -373,6 +550,116 @@ namespace DataAccessObject.Migrations
                     b.ToTable("Songs");
                 });
 
+            modelBuilder.Entity("BusinessObject.Model.Sound", b =>
+                {
+                    b.Property<int>("SoundID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SoundID"));
+
+                    b.Property<int?>("Channels")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DefaultInstrumentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Format")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InstrumentType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsPremium")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerAccountId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProviderUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SampleRate")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("SizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("SoundID");
+
+                    b.ToTable("Sounds");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.SoundPack", b =>
+                {
+                    b.Property<int>("SoundPackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SoundPackID"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerAccountId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("SoundPackID");
+
+                    b.ToTable("SoundPacks");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.SoundPackItem", b =>
+                {
+                    b.Property<int>("SoundPackItemID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SoundPackItemID"));
+
+                    b.Property<int>("SoundID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoundPackID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SoundPackItemID");
+
+                    b.HasIndex("SoundID");
+
+                    b.HasIndex("SoundPackID");
+
+                    b.ToTable("SoundPackItems");
+                });
+
             modelBuilder.Entity("BusinessObject.Model.TimeSignature", b =>
                 {
                     b.Property<int>("TimeSignatureID")
@@ -403,16 +690,53 @@ namespace DataAccessObject.Migrations
                     b.Property<int>("ClefID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SongID")
+                    b.Property<int>("ClefType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InstrumentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InstrumentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTablature")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SheetID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Transpose")
                         .HasColumnType("int");
 
                     b.HasKey("TrackID");
 
                     b.HasIndex("ClefID");
 
-                    b.HasIndex("SongID");
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("SheetID");
 
                     b.ToTable("Tracks");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.TupletGroup", b =>
+                {
+                    b.Property<int>("TupletID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TupletID"));
+
+                    b.Property<int>("ActualNotes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NormalNotes")
+                        .HasColumnType("int");
+
+                    b.HasKey("TupletID");
+
+                    b.ToTable("TupletGroups");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -596,6 +920,16 @@ namespace DataAccessObject.Migrations
                     b.Navigation("Measure");
                 });
 
+            modelBuilder.Entity("BusinessObject.Model.Instrument", b =>
+                {
+                    b.HasOne("BusinessObject.Model.Sound", "DefaultSound")
+                        .WithOne("DefaultInstrument")
+                        .HasForeignKey("BusinessObject.Model.Instrument", "DefaultSoundID")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DefaultSound");
+                });
+
             modelBuilder.Entity("BusinessObject.Model.Measure", b =>
                 {
                     b.HasOne("BusinessObject.Model.Song", "Song")
@@ -604,10 +938,16 @@ namespace DataAccessObject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BusinessObject.Model.TimeSignature", "TimeSignature")
+                        .WithMany()
+                        .HasForeignKey("TimeSignatureID");
+
                     b.Navigation("Song");
+
+                    b.Navigation("TimeSignature");
                 });
 
-            modelBuilder.Entity("BusinessObject.Model.Note", b =>
+            modelBuilder.Entity("BusinessObject.Model.MusicalEvent", b =>
                 {
                     b.HasOne("BusinessObject.Model.Measure", "Measure")
                         .WithMany("Notes")
@@ -615,18 +955,46 @@ namespace DataAccessObject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BusinessObject.Model.TupletGroup", "Tuplet")
+                        .WithMany()
+                        .HasForeignKey("TupletID");
+
                     b.Navigation("Measure");
+
+                    b.Navigation("Tuplet");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.NotationItem", b =>
+                {
+                    b.HasOne("BusinessObject.Model.Measure", "Measure")
+                        .WithMany("Notations")
+                        .HasForeignKey("MeasureID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Measure");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.NotePitch", b =>
+                {
+                    b.HasOne("BusinessObject.Model.MusicalEvent", "MusicalEvent")
+                        .WithMany("Pitches")
+                        .HasForeignKey("MusicalEventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MusicalEvent");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.NoteType", b =>
                 {
-                    b.HasOne("BusinessObject.Model.Note", "Note")
+                    b.HasOne("BusinessObject.Model.MusicalEvent", "MusicalEvent")
                         .WithMany("NoteTypes")
-                        .HasForeignKey("NoteID")
+                        .HasForeignKey("MusicalEventEventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Note");
+                    b.Navigation("MusicalEvent");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.RefreshToken", b =>
@@ -689,6 +1057,25 @@ namespace DataAccessObject.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("BusinessObject.Model.SoundPackItem", b =>
+                {
+                    b.HasOne("BusinessObject.Model.Sound", "Sound")
+                        .WithMany("SoundPackItems")
+                        .HasForeignKey("SoundID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessObject.Model.SoundPack", "SoundPack")
+                        .WithMany("Items")
+                        .HasForeignKey("SoundPackID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sound");
+
+                    b.Navigation("SoundPack");
+                });
+
             modelBuilder.Entity("BusinessObject.Model.Track", b =>
                 {
                     b.HasOne("BusinessObject.Model.Clef", "Clef")
@@ -697,15 +1084,19 @@ namespace DataAccessObject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BusinessObject.Model.Song", "Song")
+                    b.HasOne("BusinessObject.Model.Instrument", null)
                         .WithMany("Tracks")
-                        .HasForeignKey("SongID")
+                        .HasForeignKey("InstrumentID");
+
+                    b.HasOne("BusinessObject.Model.Sheet", "Sheet")
+                        .WithMany("Tracks")
+                        .HasForeignKey("SheetID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Clef");
 
-                    b.Navigation("Song");
+                    b.Navigation("Sheet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -769,6 +1160,11 @@ namespace DataAccessObject.Migrations
                     b.Navigation("Tracks");
                 });
 
+            modelBuilder.Entity("BusinessObject.Model.Instrument", b =>
+                {
+                    b.Navigation("Tracks");
+                });
+
             modelBuilder.Entity("BusinessObject.Model.KeySignature", b =>
                 {
                     b.Navigation("Sheets");
@@ -778,14 +1174,23 @@ namespace DataAccessObject.Migrations
                 {
                     b.Navigation("Beats");
 
+                    b.Navigation("Notations");
+
                     b.Navigation("Notes");
 
                     b.Navigation("Rests");
                 });
 
-            modelBuilder.Entity("BusinessObject.Model.Note", b =>
+            modelBuilder.Entity("BusinessObject.Model.MusicalEvent", b =>
                 {
                     b.Navigation("NoteTypes");
+
+                    b.Navigation("Pitches");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.Sheet", b =>
+                {
+                    b.Navigation("Tracks");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.Song", b =>
@@ -793,8 +1198,18 @@ namespace DataAccessObject.Migrations
                     b.Navigation("Measures");
 
                     b.Navigation("Sheets");
+                });
 
-                    b.Navigation("Tracks");
+            modelBuilder.Entity("BusinessObject.Model.Sound", b =>
+                {
+                    b.Navigation("DefaultInstrument");
+
+                    b.Navigation("SoundPackItems");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.SoundPack", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.TimeSignature", b =>

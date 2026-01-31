@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static BusinessObject.Enums.MusicNotationEnums;
 
 namespace Service.Service
 {
@@ -46,15 +47,15 @@ namespace Service.Service
 
         public async Task<BaseResponse<NoteResponse>> CreateAsync(CreateNoteRequest request)
         {
-            var entity = new Note
+            var pitch = new NotePitch { Step = 0, Octave = request.Octave, Alter = (Alter)request.Alter };
+            // Map incoming CreateNoteRequest into MusicalEvent; store single pitch in Pitches
+            var entity = new MusicalEvent
             {
                 MeasureID = request.MeasureID,
-                Pitch = request.Pitch,
-                Octave = request.Octave,
-                Alter = (BusinessObject.Model.Alter)request.Alter,
-                Duration = request.Duration,
                 StartBeat = request.StartBeat,
-                IsChord = request.IsChord
+                DurationInBeats = request.Duration,
+                IsChord = request.IsChord,
+                Pitches = new List<NotePitch> { pitch }
             };
             try
             {
@@ -73,12 +74,18 @@ namespace Service.Service
             {
                 var existing = await _repo.GetByIdAsync(id);
                 existing.MeasureID = request.MeasureID;
-                existing.Pitch = request.Pitch;
-                existing.Octave = request.Octave;
-                existing.Alter = (BusinessObject.Model.Alter)request.Alter;
-                existing.Duration = request.Duration;
                 existing.StartBeat = request.StartBeat;
+                existing.DurationInBeats = request.Duration;
                 existing.IsChord = request.IsChord;
+
+                // update first pitch if present
+                var first = existing.Pitches.FirstOrDefault();
+                if (first != null)
+                {
+                    first.Octave = request.Octave;
+                    first.Alter = (Alter)request.Alter;
+                    first.Step = 0; // leaving for compatibility (Step mapping not provided)
+                }
                 var updated = await _repo.UpdateAsync(existing);
                 return new BaseResponse<NoteResponse>("Update Success", StatusCodeEnum.OK_200, _mapper.Map<NoteResponse>(updated));
             }
