@@ -57,9 +57,6 @@ namespace Service
             services.AddScoped<ISongService, SongService>();
             services.AddScoped<ISongRepository, SongRepository>();
 
-            services.AddScoped<IRestService, RestService>();
-            services.AddScoped<IRestRepository, RestRepository>();
-
             services.AddScoped<ITupletGroupService, TupletGroupService>();
             services.AddScoped<ITupletGroupRepository, TupletGroupRepository>();
 

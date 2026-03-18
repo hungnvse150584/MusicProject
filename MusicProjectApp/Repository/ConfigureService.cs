@@ -27,7 +27,6 @@ namespace Repository
             services.AddScoped<IKeySignatureRepository, KeySignatureRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
             services.AddScoped<INoteTypeRepository, NoteTypeRepository>();
-            services.AddScoped<IRestRepository, RestRepository>();
             services.AddScoped<ISheetRepository, SheetRepository>();
             services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<ITimeSignatureRepository, TimeSignatureRepository>();
@@ -51,7 +50,6 @@ namespace Repository
             services.AddScoped<MeasureDAO>();
             services.AddScoped<NoteDAO>();
             services.AddScoped<NoteTypeDAO>();
-            services.AddScoped<RestDAO>();
             services.AddScoped<SheetDAO>();
             services.AddScoped<SongDAO>();
             services.AddScoped<TimeSignatureDAO>();

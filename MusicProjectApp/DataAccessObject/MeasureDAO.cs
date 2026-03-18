@@ -31,7 +31,6 @@ namespace DataAccessObject
             var entity = await _context.Set<Measure>()
                         .Include(c => c.Beats)
                         .Include(c => c.Notes)
-                        .Include(c => c.Rests)
                .SingleOrDefaultAsync(c => c.MeasureID == id);
             if (entity == null)
             {

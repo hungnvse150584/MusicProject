@@ -28,7 +28,6 @@ namespace Service.Service
         private readonly ISongRepository _songRepository;
         private readonly IMeasureRepository _measureRepository;
         private readonly INoteRepository _noteRepository;
-        private readonly IRestRepository _restRepository;
         private readonly IBeatRepository _beat_repository;
         private readonly INoteTypeRepository _noteTypeRepository;
         private readonly IKeySignatureRepository _keySignatureRepository;
@@ -44,7 +43,6 @@ namespace Service.Service
             ISongRepository songRepository,
             IMeasureRepository measureRepository,
             INoteRepository noteRepository,
-            IRestRepository restRepository,
             IBeatRepository beatRepository,
             INoteTypeRepository noteTypeRepository,
             IKeySignatureRepository keySignatureRepository,
@@ -58,7 +56,6 @@ namespace Service.Service
             _songRepository = songRepository;
             _measureRepository = measureRepository;
             _noteRepository = noteRepository;
-            _restRepository = restRepository;
             _beat_repository = beatRepository;
             _noteTypeRepository = noteTypeRepository;
             _keySignatureRepository = keySignatureRepository;

@@ -22,7 +22,7 @@ namespace BusinessObject.Model
 
         public ICollection<Beat> Beats { get; set; } = new List<Beat>();
         public ICollection<MusicalEvent> Notes { get; set; } = new List<MusicalEvent>();
-        public ICollection<Rest> Rests { get; set; } = new List<Rest>();
+    
         public ICollection<NotationItem> Notations { get; set; } = new List<NotationItem>();
         public BarlineType EndBarline { get; set; } = BarlineType.Regular;
         public BarlineType RightBarline { get; set; } = BarlineType.Regular;  // ← barline kết thúc ô

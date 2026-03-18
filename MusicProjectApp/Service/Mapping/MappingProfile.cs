@@ -50,7 +50,6 @@ namespace Service.Mapping
 
             CreateMap<Beat, BeatResponse>();
             CreateMap<Song, SongResponse>();
-            CreateMap<Rest, RestResponse>();
             CreateMap<Sound, Sound>();
             CreateMap<SoundPack, SoundPack>();
             CreateMap<SoundPackItem, SoundPackItem>();

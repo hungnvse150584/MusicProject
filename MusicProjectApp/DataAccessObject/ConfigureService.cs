@@ -22,7 +22,6 @@ namespace DataAccessObject
             services.AddScoped<Measure>();
             services.AddScoped<MusicalEvent>();
             services.AddScoped<NoteType>();
-            services.AddScoped<Rest>();
             services.AddScoped<Sheet>();
             services.AddScoped<Song>();
             services.AddScoped<TimeSignature>();

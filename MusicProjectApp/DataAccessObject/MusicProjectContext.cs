@@ -101,7 +101,6 @@ namespace DataAccessObject
         public DbSet<TupletGroup> TupletGroups { get; set; }
         public DbSet<NotationItem> NotationItems { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Rest> Rests { get; set; }
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<TimeSignature> TimeSignatures { get; set; }
